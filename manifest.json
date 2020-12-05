@@ -1,0 +1,17 @@
+{  
+    "name": "Daily Bible Reading",
+    "short_name": "Daily Bible Reading",  
+    "description": "Daily Bible Reading Schedule",  
+    "start_url": "./index.html",  
+    "icons": [  
+      {  
+        "src": "favicon.png",  
+        "sizes": "512x512",  
+        "type": "image/png"  
+      }  
+    ],  
+    "theme_color": "#664229",  
+    "background_color": "#E5D3B3",  
+    "display": "fullscreen",  
+    "orientation": "portrait"  
+  }  
