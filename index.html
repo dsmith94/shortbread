@@ -1,6 +1,7 @@
 
 <head>
     <meta charset="utf-8">
+    <title>Daily Bible Reading</title>
     <style type="text/css">
 
         #Display
@@ -21,7 +22,6 @@
 
         i
         {
-            font-family: cursive;
             font-size: small;
         }
 
@@ -505,6 +505,13 @@ function getStorageKey(str) {
 }
 
 
+function confirmRemoveNote(key) {
+    if (confirm(`Are you sure to erase note for ${key}?`)) {
+        localStorage.removeItem(key);
+    }
+}
+
+
 function buildInterface() {
     var str = "";
     for (const title in readingTable) {
@@ -516,7 +523,7 @@ function buildInterface() {
             const lastRead = localStorage.getItem(key);
             str += `<div class='slab'>${link}`;
             if (lastRead) {
-                str += `&emsp;<span class='checkmark'>✔</span> <i>Read on ${lastRead}</i>`;
+                str += `&emsp;<span class='checkmark'>✔</span> <a href="#" onclick="confirmRemoveNote('${key}');return false;"><i>Read on ${lastRead}</i></a>`;
             }
             str += '</div>';
         }
