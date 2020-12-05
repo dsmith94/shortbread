@@ -1,0 +1,557 @@
+
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+
+        #Display
+        {
+            background-color: #E5D3B3;
+        }
+
+        body
+        {
+            font-family: Georgia, serif;
+        }
+
+        a
+        {
+            text-decoration:none;
+            color: black;
+        }
+
+        i
+        {
+            font-family: cursive;
+            font-size: small;
+        }
+
+        h1
+        {
+            font-family: sans-serif;
+        }
+
+        h3
+        {
+            margin-top: 4em;
+            font-family: sans-serif;
+            text-align: center;
+            color: #664229;
+        }
+
+        .slab
+        {
+            padding: 1em;
+            padding-left: 4em;
+            margin-bottom: 1em;
+            background-color: #D2B48C;
+        }
+
+        .diamond
+        {
+            color: red;
+        }
+
+        .dot
+        {
+            color: blue;
+        }
+
+        .checkmark
+        {
+            color: green;
+        }
+
+        button
+        {
+            margin-left: 80%;
+            font-size: 400%;
+            height:2em;
+            width:2em;
+        }
+
+    </style>
+
+<script>
+
+const readingTable = {
+    "The Writings of Moses" : [
+        "Genesis 1-3",
+        "Genesis 4-7",
+        "Genesis 8-11",
+        "[red diamond] Genesis 12-15",
+        "[red diamond] Genesis 16-18",
+        "[red diamond] Genesis 19-22",
+        "[red diamond] Genesis 23-24",
+        "[red diamond] Genesis 25-27",
+        "[red diamond] Genesis 28-30",
+        "[red diamond] Genesis 31-32",
+        "[red diamond] Genesis 33-34",
+        "[red diamond] Genesis 35-37",
+        "[red diamond] Genesis 38-40",
+        "[red diamond] Genesis 41-42",
+        "[red diamond] Genesis 43-45",
+        "[red diamond] Genesis 46-48",
+        "[red diamond] Genesis 49-50",
+        "[red diamond] Exodus 1-4",
+        "[red diamond] Exodus 5-7",
+        "[red diamond] Exodus 8-10",
+        "[red diamond] Exodus 11-13",
+        "[red diamond] Exodus 14-15",
+        "[red diamond] Exodus 16-18",
+        "[red diamond] Exodus 19-21",
+        "Exodus 22-25",
+        "Exodus 26-28",
+        "Exodus 29-30",
+        "[red diamond] Exodus 31-33",
+        "[red diamond] Exodus 34-35",
+        "Exodus 36-38",
+        "Exodus 39-40",
+        "Leviticus 1-4",
+        "Leviticus 5-7",
+        "Leviticus 8-10",
+        "Leviticus 11-13",
+        "Leviticus 14-15",
+        "Leviticus 16-18",
+        "Leviticus 19-21",
+        "Leviticus 22-23",
+        "Leviticus 24-25",
+        "Leviticus 26-27",
+        "Numbers 1-3",
+        "Numbers 4-6",
+        "Numbers 7-9",
+        "[red diamond] Numbers 10-12",
+        "[red diamond] Numbers 13-15",
+        "[red diamond] Numbers 16-18",
+        "[red diamond] Numbers 19-21",
+        "[red diamond] Numbers 22-24",
+        "[red diamond] Numbers 25-27",
+        "Numbers 28-30",
+        "[red diamond] Numbers 31-32",
+        "[red diamond] Numbers 33-36",
+        "Deuteronomy 1-2  ",
+        "[red diamond] Deuteronomy 3-4",
+        "Deuteronomy 5-7",
+        "Deuteronomy 8-10",
+        "Deuteronomy 11-13",
+        "Deuteronomy 14-16",
+        "[red diamond] Deuteronomy 17-19",
+        "Deuteronomy 20-22",
+        "Deuteronomy 23-26",
+        "Deuteronomy 27-28",
+        "[red diamond] Deuteronomy 29-31",
+        "[red diamond] Deuteronomy chapter 32",
+        "[red diamond] Deuteronomy 33-34",
+        "Job 1-5",
+        "Job 6-9",
+        "Job 10-14",
+        "Job 15-18",
+        "Job 19-20",
+        "Job 21-24",
+        "Job 25-29",
+        "Job 30-31",
+        "Job 32-34",
+        "Job 35-38",
+        "Job 39-42"
+    ],
+    "Israel Enters the Promised Land": [
+        "[red diamond] Joshua 1-4",
+        "[red diamond] Joshua 5-7",
+        "[red diamond] Joshua 8-9",
+        "[red diamond] Joshua 10-12",
+        "[red diamond] Joshua 13-15",
+        "[red diamond] Joshua 16-18",
+        "[red diamond] Joshua 19-21",
+        "[red diamond] Joshua 22-24",
+        "[red diamond] Judges 1-2",
+        "[red diamond] Judges 3-5",
+        "[red diamond] Judges 6-7",
+        "[red diamond] Judges 8-9",
+        "[red diamond] Judges 10-11",
+        "[red diamond] Judges 12-13",
+        "[red diamond] Judges 14-16",
+        "[red diamond] Judges 17-19",
+        "[red diamond] Judges 20-21",
+        "[red diamond] Ruth 1-4"
+    ],
+    "When the Kings Ruled Israel": [
+        "[red diamond] 1 Samuel 1-2",
+        "[red diamond] 1 Samuel 3-6",
+        "[red diamond] 1 Samuel 7-9",
+        "[red diamond] 1 Samuel 10-12",
+        "[red diamond] 1 Samuel 13-14",
+        "[red diamond] 1 Samuel 15-16",
+        "[red diamond] 1 Samuel 17-18",
+        "[red diamond] 1 Samuel 19-21",
+        "[red diamond] 1 Samuel 22-24",
+        "[red diamond] 1 Samuel 25-27",
+        "[red diamond] 1 Samuel 28-31",
+        "[red diamond] 2 Samuel 1-2",
+        "[red diamond] 2 Samuel 3-5",
+        "[red diamond] 2 Samuel 6-8",
+        "[red diamond] 2 Samuel 9-12",
+        "[red diamond] 2 Samuel 13-14",
+        "[red diamond] 2 Samuel 15-16",
+        "[red diamond] 2 Samuel 17-18",
+        "[red diamond] 2 Samuel 19-20",
+        "[red diamond] 2 Samuel 21-22",
+        "[red diamond] 2 Samuel 23-24",
+        "[red diamond] 1 Kings 1-2",
+        "[red diamond] 1 Kings 3-5",
+        "[red diamond] 1 Kings 6-7",
+        "[red diamond] 1 Kings chapter 8",
+        "[red diamond] 1 Kings 9-10",
+        "[red diamond] 1 Kings 11-12",
+        "[red diamond] 1 Kings 13-14",
+        "[red diamond] 1 Kings 15-17",
+        "[red diamond] 1 Kings 18-19",
+        "[red diamond] 1 Kings 20-21",
+        "[red diamond] 1 Kings chapter 22",
+        "[red diamond] 2 Kings 1-3",
+        "[red diamond] 2 Kings 4-5",
+        "[red diamond] 2 Kings 6-8",
+        "[red diamond] 2 Kings 9-10",
+        "[red diamond] 2 Kings 11-13",
+        "[red diamond] 2 Kings 14-15",
+        "[red diamond] 2 Kings 16-17",
+        "[red diamond] 2 Kings 18-19",
+        "[red diamond] 2 Kings 20-22",
+        "[red diamond] 2 Kings 23-25",
+        "1 Chronicles 1-2",
+        "1 Chronicles 3-5",
+        "1 Chronicles 6-7",
+        "1 Chronicles 8-10",
+        "1 Chronicles 11-12",
+        "1 Chronicles 13-15",
+        "1 Chronicles 16-17",
+        "1 Chronicles 18-20",
+        "1 Chronicles 21-23",
+        "1 Chronicles 24-26",
+        "1 Chronicles 27-29",
+        "2 Chronicles 1-3",
+        "2 Chronicles 4-6",
+        "2 Chronicles 7-9",
+        "2 Chronicles 10-14",
+        "2 Chronicles 15-18",
+        "2 Chronicles 19-22",
+        "2 Chronicles 23-25",
+        "2 Chronicles 26-28",
+        "2 Chronicles 29-30",
+        "2 Chronicles 31-33",
+        "2 Chronicles 34-36",
+    ],
+    "The Jews Return From Exile": [
+        "[red diamond] Ezra 1-3",
+        "[red diamond] Ezra 4-7",
+        "[red diamond] Ezra 8-10",
+        "[red diamond] Nehemiah 1-3",
+        "[red diamond] Nehemiah 4-6",
+        "[red diamond] Nehemiah 7-8",
+        "[red diamond] Nehemiah 9-10",
+        "[red diamond] Nehemiah 11-13",
+        "[red diamond] Esther 1-4",
+        "[red diamond] Esther 5-10"
+    ],
+    "Books of Songs and Practical Wisdom": [
+        "Psalms 1-8",
+        "Psalms 9-16",
+        "Psalms 17-19",
+        "Psalms 20-25",
+        "Psalms 26-31",
+        "Psalms 32-35",
+        "Psalms 36-38",
+        "Psalms 39-42",
+        "Psalms 43-47",
+        "Psalms 48-52",
+        "Psalms 53-58",
+        "Psalms 59-64",
+        "Psalms 65-68",
+        "Psalms 69-72",
+        "Psalms 73-77",
+        "Psalms 78-79",
+        "Psalms 80-86",
+        "Psalms 87-90",
+        "Psalms 91-96",
+        "Psalms 97-103",
+        "Psalms 104-105",
+        "Psalms 106-108",
+        "Psalms 109-115",
+        "Psalm 116 to Psalm 119:63",
+        "Psalm 119:64-176",
+        "Psalms 120-129",
+        "Psalms 130-138",
+        "Psalms 139-144",
+        "Psalms 145-150",
+        "Proverbs 1-4",
+        "Proverbs 5-8",
+        "Proverbs 9-12",
+        "Proverbs 13-16",
+        "Proverbs 17-19",
+        "Proverbs 20-22",
+        "Proverbs 23-27",
+        "Proverbs 28-31",
+        "Ecclesiastes 1-4",
+        "Ecclesiastes 5-8",
+        "Ecclesiastes 9-12",
+        "Song of Solomon 1-8"
+    ],
+    "The Prophets": [
+        "Isaiah 1-4",
+        "Isaiah 5-7",
+        "Isaiah 8-10",
+        "Isaiah 11-14",
+        "Isaiah 15-19",
+        "Isaiah 20-24",
+        "Isaiah 25-28",
+        "Isaiah 29-31",
+        "Isaiah 32-35",
+        "Isaiah 36-37",
+        "Isaiah 38-40",
+        "Isaiah 41-43",
+        "Isaiah 44-47",
+        "Isaiah 48-50",
+        "Isaiah 51-55",
+        "Isaiah 56-58",
+        "Isaiah 59-62",
+        "Isaiah 63-66",
+        "Jeremiah 1-3",
+        "Jeremiah 4-5",
+        "Jeremiah 6-7",
+        "Jeremiah 8-10",
+        "Jeremiah 11-13",
+        "Jeremiah 14-16",
+        "Jeremiah 17-20",
+        "Jeremiah 21-23",
+        "Jeremiah 24-26",
+        "Jeremiah 27-29",
+        "Jeremiah 30-31",
+        "Jeremiah 32-33",
+        "Jeremiah 34-36",
+        "Jeremiah 37-39",
+        "Jeremiah 40-42",
+        "Jeremiah 43-44",
+        "Jeremiah 45-48",
+        "Jeremiah 49-50",
+        "Jeremiah 51-52",
+        "Lamentations 1-2",
+        "Lamentations 3-5",
+        "Ezekiel 1-3",
+        "Ezekiel 4-6",
+        "Ezekiel 7-9",
+        "Ezekiel 10-12",
+        "Ezekiel 13-15",
+        "Ezekiel chapter 16",
+        "Ezekiel 17-18",
+        "Ezekiel 19-21",
+        "Ezekiel 22-23",
+        "Ezekiel 24-26",
+        "Ezekiel 27-28",
+        "Ezekiel 29-31",
+        "Ezekiel 32-33",
+        "Ezekiel 34-36",
+        "Ezekiel 37-38",
+        "Ezekiel 39-40",
+        "Ezekiel 41-43",
+        "Ezekiel 44-45",
+        "Ezekiel 46-48",
+        "Daniel 1-2",
+        "Daniel 3-4",
+        "Daniel 5-7",
+        "Daniel 8-10",
+        "Daniel 11-12",
+        "Hosea 1-7",
+        "Hosea 8-14",
+        "Joel 1-3",
+        "Amos 1-5",
+        "Amos 6-9",
+        "Obadiah 1-21",
+        "Jonah 1-4",
+        "Micah 1-7",
+        "Nahum 1-3",
+        "Habakkuk 1-3",
+        "Zephaniah 1-3",
+        "Haggai 1-2",
+        "Zechariah 1-7",
+        "Zechariah 8-11",
+        "Zechariah 12-14",
+        "Malachi 1-4"
+    ],
+    "Accounts of Jesus’ Life and Ministry": [
+        "Matthew 1-4",
+        "Matthew 5-7",
+        "Matthew 8-10",
+        "Matthew 11-13",
+        "Matthew 14-17",
+        "Matthew 18-20",
+        "Matthew 21-23",
+        "Matthew 24-25",
+        "Matthew chapter 26",
+        "Matthew 27-28",
+        "[blue dot] Mark 1-3",
+        "[blue dot] Mark 4-5",
+        "[blue dot] Mark 6-8",
+        "[blue dot] Mark 9-10",
+        "[blue dot] Mark 11-13",
+        "[blue dot] Mark 14-16",
+        "Luke 1-2",
+        "Luke 3-5",
+        "Luke 6-7",
+        "Luke 8-9",
+        "Luke 10-11",
+        "Luke 12-13",
+        "Luke 14-17",
+        "Luke 18-19",
+        "Luke 20-22",
+        "Luke 23-24",
+        "John 1-3",
+        "John 4-5",
+        "John 6-7",
+        "John 8-9",
+        "John 10-12",
+        "John 13-15",
+        "John 16-18",
+        "John 19-21"
+    ],
+    "Growth of the Christian Congregation": [
+        "[blue dot] Acts 1-3",
+        "[blue dot] Acts 4-6",
+        "[blue dot] Acts 7-8",
+        "[blue dot] Acts 9-11",
+        "[blue dot] Acts 12-14",
+        "[blue dot] Acts 15-16",
+        "[blue dot] Acts 17-19",
+        "[blue dot] Acts 20-21",
+        "[blue dot] Acts 22-23",
+        "[blue dot] Acts 24-26",
+        "[blue dot] Acts 27-28"
+    ],
+    "The Letters of Paul": [
+        "Romans 1-3",
+        "Romans 4-7",
+        "Romans 8-11",
+        "Romans 12-16",
+        "1 Corinthians 1-6",
+        "1 Corinthians 7-10",
+        "1 Corinthians 11-14",
+        "1 Corinthians 15-16",
+        "2 Corinthians 1-6",
+        "2 Corinthians 7-10",
+        "2 Corinthians 11-13",
+        "Galatians 1-6",
+        "Ephesians 1-6",
+        "Philippians 1-4",
+        "Colossians 1-4",
+        "1 Thessalonians 1-5",
+        "2 Thessalonians 1-3",
+        "1 Timothy 1-6",
+        "2 Timothy 1-4",
+        "Titus 1-3",
+        "Philemon 1-25",
+        "Hebrews 1-6",
+        "Hebrews 7-10",
+        "Hebrews 11-13"
+    ],
+    "The Writings of the Other Apostles and Disciples": [
+        "James 1-5",
+        "1 Peter 1-5",
+        "2 Peter 1-3",
+        "1 John 1-5",
+        "2 John 1-13",
+        "3 John 1-14",
+        "Jude 1-25",
+        "Revelation 1-4",
+        "Revelation 5-9",
+        "Revelation 10-14",
+        "Revelation 15-18",
+        "Revelation 19-22"
+    ]
+}
+
+
+function cleanString(str) {
+    str = str.replace("[red diamond]", "<span class='diamond'>◆</span>");
+    str = str.replace("[blue dot]", "<span class='dot'>●</span>");
+    return str;
+}
+
+
+function buildLink(str) {
+    str = str.replace("[red diamond] ", "");
+    str = str.replace("[blue dot] ", "");
+    str = str.replace(" ", "+");
+    str = `https://wol.jw.org/en/wol/l/r1/lp-e?q=${str}`;
+    return str;
+}
+
+
+function handleLink(link, key) {
+    const d = new Date();
+    localStorage.setItem(key, d.toDateString());
+    window.open(link);
+    onLoad();
+}
+
+
+function generateLink(str, key) {
+    const a = buildLink(str);
+    const label = cleanString(str);
+    return `<a href="#" onclick="handleLink('${a}', '${key}');return false;">${label}</a>`;
+}
+
+
+function getStorageKey(str) {
+    str = str.replace("[red diamond] ", "");
+    str = str.replace("[blue dot] ", "");
+    return str;
+}
+
+
+function buildInterface() {
+    var str = "";
+    for (const title in readingTable) {
+        str += `<h3>${title}</h3>`;
+        for (const subtitle in readingTable[title]) {
+            const text = readingTable[title][subtitle];
+            const key = getStorageKey(text);
+            const link = generateLink(text, key);
+            const lastRead = localStorage.getItem(key);
+            str += `<div class='slab'>${link}`;
+            if (lastRead) {
+                str += `&emsp;<span class='checkmark'>✔</span> <i>Read on ${lastRead}</i>`;
+            }
+            str += '</div>';
+        }
+    }
+    return str;
+}
+
+
+function onLoad() {
+    const d = document.getElementById("Display");
+    if (d) {
+        d.innerHTML = buildInterface();
+    }
+}
+
+function eraseAll() {
+    if (confirm("Are you sure to erase all notes?")) {
+        localStorage.clear();
+        onLoad();
+    }
+}
+
+</script>
+
+</head>
+<body>
+    <h1>Daily Bible Reading Schedule</h1>
+    <p>If you read one set of chapters each day, you will have read the entire Bible in one year.</p>
+    <p>Read days marked with a RED diamond to gain a historical overview of God’s dealings with the Israelites.</p>
+    <p>Read days marked with a BLUE dot to gain a chronological overview of the development of the Christian congregation.</p>
+    <div id="Display"></div>
+
+    <button onclick="eraseAll();">⚠</button>
+
+    <script>
+        onLoad();
+    </script>
+</body>
