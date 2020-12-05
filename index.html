@@ -508,6 +508,7 @@ function getStorageKey(str) {
 function confirmRemoveNote(key) {
     if (confirm(`Are you sure to erase note for ${key}?`)) {
         localStorage.removeItem(key);
+        onLoad();
     }
 }
 
