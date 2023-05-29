@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>Daily Bible Reading</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png"/>
     <link rel="manifest" href="manifest.json">
     <style type="text/css">
 
@@ -137,7 +137,7 @@ const readingTable = {
         "Numbers 28-30",
         "[red diamond] Numbers 31-32",
         "[red diamond] Numbers 33-36",
-        "Deuteronomy 1-2  ",
+        "Deuteronomy 1-2",
         "[red diamond] Deuteronomy 3-4",
         "Deuteronomy 5-7",
         "Deuteronomy 8-10",
@@ -183,7 +183,7 @@ const readingTable = {
         "[red diamond] Ruth 1-4"
     ],
     "When the Kings Ruled Israel": [
-        "[red diamond] 1 Samuel 1-2",
+        "[red diamond] 1 Samuel 1-2",
         "[red diamond] 1 Samuel 3-6",
         "[red diamond] 1 Samuel 7-9",
         "[red diamond] 1 Samuel 10-12",
@@ -194,7 +194,7 @@ const readingTable = {
         "[red diamond] 1 Samuel 22-24",
         "[red diamond] 1 Samuel 25-27",
         "[red diamond] 1 Samuel 28-31",
-        "[red diamond] 2 Samuel 1-2",
+        "[red diamond] 2 Samuel 1-2",
         "[red diamond] 2 Samuel 3-5",
         "[red diamond] 2 Samuel 6-8",
         "[red diamond] 2 Samuel 9-12",
@@ -204,18 +204,18 @@ const readingTable = {
         "[red diamond] 2 Samuel 19-20",
         "[red diamond] 2 Samuel 21-22",
         "[red diamond] 2 Samuel 23-24",
-        "[red diamond] 1 Kings 1-2",
+        "[red diamond] 1 Kings 1-2",
         "[red diamond] 1 Kings 3-5",
         "[red diamond] 1 Kings 6-7",
         "[red diamond] 1 Kings 8",
         "[red diamond] 1 Kings 9-10",
         "[red diamond] 1 Kings 11-12",
-        "[red diamond] 1 Kings 13-14",
+        "[red diamond] 1 Kings 13-14",
         "[red diamond] 1 Kings 15-17",
         "[red diamond] 1 Kings 18-19",
         "[red diamond] 1 Kings 20-21",
         "[red diamond] 1 Kings 22",
-        "[red diamond] 2 Kings 1-3",
+        "[red diamond] 2 Kings 1-3",
         "[red diamond] 2 Kings 4-5",
         "[red diamond] 2 Kings 6-8",
         "[red diamond] 2 Kings 9-10",
@@ -225,7 +225,7 @@ const readingTable = {
         "[red diamond] 2 Kings 18-19",
         "[red diamond] 2 Kings 20-22",
         "[red diamond] 2 Kings 23-25",
-        "1 Chronicles 1-2",
+        "1 Chronicles 1-2",
         "1 Chronicles 3-5",
         "1 Chronicles 6-7",
         "1 Chronicles 8-10",
@@ -236,7 +236,7 @@ const readingTable = {
         "1 Chronicles 21-23",
         "1 Chronicles 24-26",
         "1 Chronicles 27-29",
-        "2 Chronicles 1-3",
+        "2 Chronicles 1-3",
         "2 Chronicles 4-6",
         "2 Chronicles 7-9",
         "2 Chronicles 10-14",
@@ -438,21 +438,21 @@ const readingTable = {
         "Romans 4-7",
         "Romans 8-11",
         "Romans 12-16",
-        "1 Corinthians 1-6",
-        "1 Corinthians 7-10",
-        "1 Corinthians 11-14",
-        "1 Corinthians 15-16",
-        "2 Corinthians 1-6",
-        "2 Corinthians 7-10",
-        "2 Corinthians 11-13",
+        "1 Corinthians 1-6",
+        "1 Corinthians 7-10",
+        "1 Corinthians 11-14",
+        "1 Corinthians 15-16",
+        "2 Corinthians 1-6",
+        "2 Corinthians 7-10",
+        "2 Corinthians 11-13",
         "Galatians 1-6",
         "Ephesians 1-6",
         "Philippians 1-4",
         "Colossians 1-4",
-        "1 Thessalonians 1-5",
-        "2 Thessalonians 1-3",
-        "1 Timothy 1-6",
-        "2 Timothy 1-4",
+        "1 Thessalonians 1-5",
+        "2 Thessalonians 1-3",
+        "1 Timothy 1-6",
+        "2 Timothy 1-4",
         "Titus 1-3",
         "Philemon 1-25",
         "Hebrews 1-6",
@@ -461,10 +461,10 @@ const readingTable = {
     ],
     "The Writings of the Other Apostles and Disciples": [
         "James 1-5",
-        "1 Peter 1-5",
-        "2 Peter 1-3",
-        "1 John 1-5",
-        "2 John 1-13",
+        "1 Peter 1-5",
+        "2 Peter 1-3",
+        "1 John 1-5",
+        "2 John 1-13",
         "3 John 1-14",
         "Jude 1-25",
         "Revelation 1-4",
@@ -483,11 +483,31 @@ function cleanString(str) {
 }
 
 
+function edgeCase(str) {
+    const ps1 = "Psalm+116 to Psalm 119:63";
+    const ps2 = "Psalm 119:64-176";
+    const a = `https://wol.jw.org/en/wol/l/r1/lp-e?q=Psalm+116-119%3A63`;
+    const b = `https://wol.jw.org/en/wol/l/r1/lp-e?q=Psalm+119%3A64-176`;
+    if (str === ps1) {
+        return a;
+    }
+    if (str === ps2) {
+        return b;
+    }
+    return undefined;
+}
+
+
 function buildLink(str) {
     str = str.replace("[red diamond] ", "");
     str = str.replace("[blue dot] ", "");
     str = str.replace(" ", "+");
-    str = `https://wol.jw.org/en/wol/l/r1/lp-e?q=${str}`;
+    const edge = edgeCase(str);
+    if (edge) {
+        str = edge;
+    } else {
+        str = `https://wol.jw.org/en/wol/l/r1/lp-e?q=${str}`;
+    }
     return str;
 }
 
